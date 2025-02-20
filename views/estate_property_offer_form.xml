@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<odoo>
+    <!-- Vista de formulari per a les ofertes de propietats -->
+    <record id="view_estate_property_offer_form" model="ir.ui.view">
+        <field name="name">estate.property.offer.form</field>
+        <field name="model">estate.property.offer</field>
+        <field name="arch" type="xml">
+            <form string="Oferta de Propietat">
+                <group>
+                    <field name="buyer_id"/> <!-- Comprador que fa l'oferta -->
+                    <field name="price"/> <!-- Import de l'oferta -->
+                    <field name="state"/> <!-- Estat de l'oferta -->
+                    <field name="comments"/> <!-- Comentaris addicionals -->
+                </group>
+            </form>
+        </field>
+    </record>
+</odoo>

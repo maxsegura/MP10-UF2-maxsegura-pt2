@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<odoo>
+    <!-- Definició de la vista del formulari per la propietat immobiliària -->
+    <record id="view_estate_property_form" model="ir.ui.view">
+        <!-- Nom de la vista que es farà servir a l'aplicació -->
+        <field name="name">estate.property.form</field>
+        <!-- Model al qual s'aplica aquesta vista -->
+        <field name="model">estate.property</field>
+        
+        <!-- Definició de l'estructura XML de la vista -->
+        <field name="arch" type="xml">
+            <form>
+                <!-- Full del formulari, que contindrà els camps per editar les dades -->
+                <sheet>
+                    <group>
+                        <!-- Camp per mostrar o editar el nom de la propietat -->
+                        <field name="name"/>
+                        
+                        <!-- Grup de camps relacionats amb la informació bàsica de la propietat -->
+                        <group col="3">
+                            <!-- Codi Postal de la propietat -->
+                            <field name="postalcode"/>
+                            <!-- Preu de venda esperat -->
+                            <field name="selling_price"/>
+                            <!-- Data de disponibilitat de la propietat -->
+                            <field name="date_availability"/>
+                            <!-- Millor oferta rebuda fins al moment (només lectura) -->
+                            <field name="best_offer" readonly="1"/>
+                            <!-- Estat de la propietat (Nova, Oferta Rebuda, etc.) -->
+                            <field name="state"/>
+                            <!-- Tipus de propietat, amb l'opció de no crear nous tipus des d'aquesta vista -->
+                            <field name="type_id" options="{'no_create': True}" string="Tipus de Propietat"/>
+                        </group>
+                    </group>
+
+                    <!-- Secció de blocs de notes que permet organitzar la informació en diferents pàgines -->
+                    <notebook>
+                        <!-- Pàgina per a la descripció detallada de la propietat -->
+                        <page string="Descripció">
+                            <group>
+                                <!-- Camp per la descripció de la propietat -->
+                                <field name="description"/>
+                                <group>
+                                    <group>
+                                        <!-- Superfície de la propietat (en m2) -->
+                                        <field name="area"/>
+                                        <!-- Nombre d'habitacions -->
+                                        <field name="bedrooms"/>
+                                        <!-- Nombre de banys -->
+                                        <field name="bathrooms"/>
+                                        <!-- Any de construcció de la propietat -->
+                                        <field name="construction_year"/>
+                                        <!-- Certificat energètic -->
+                                        <field name="energy_certificate"/>
+                                        <!-- Etiquetes de la propietat (per exemple, platja, muntanya...) -->
+                                        <field name="tag_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                                        <!-- Comercial assignat a la propietat -->
+                                        <field name="user_id" options="{'no_create': True}"/>
+                                    </group>
+                                    <group>
+                                        <!-- Comprador de la propietat (si n'hi ha) -->
+                                        <field name="buyer_id" readonly="1"/>
+                                        <!-- Preu final de la propietat després de l'oferta acceptada -->
+                                        <field name="final_price" readonly="1"/>
+                                        <!-- Preu per m2 (calculat automàticament) -->
+                                        <field name="price_per_m2" readonly="1"/>
+                                    </group>
+                                </group>
+                                <group>
+                                    <!-- Indicador si la propietat té parking -->
+                                    <field name="has_parking"/>
+                                    <!-- Indicador si la propietat té ascensor -->
+                                    <field name="has_elevator"/>
+                                    <!-- Indicador si la propietat ha estat renovada -->
+                                    <field name="is_renovated"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <!-- Pàgina per veure les ofertes rebudes per la propietat -->
+                        <page string="Ofertes">
+                            <!-- Llistat d'ofertes amb els seus camps -->
+                            <field name="offer_ids">
+                                <list>
+                                    <!-- Preu de cada oferta -->
+                                    <field name="price"/>
+                                    <!-- Estat de cada oferta (acceptada, rebutjada, etc.) -->
+                                    <field name="state"/>
+                                    <!-- Comprador de la propietat, si s'ha assignat -->
+                                    <field name="buyer_id"/>
+                                    <!-- Comentaris de la oferta -->
+                                    <field name="comments"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

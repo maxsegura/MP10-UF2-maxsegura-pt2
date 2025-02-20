@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<odoo>
+    <!-- Vista en format llista per a les propietats immobiliàries -->
+    <record id="view_estate_property_list" model="ir.ui.view">
+        <field name="name">estate.property.list</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/> <!-- Nom de la propietat -->
+                <field name="date_availability"/> <!-- Data de disponibilitat -->
+                <field name="postalcode"/> <!-- Codi postal -->
+                <field name="selling_price"/> <!-- Preu de venda -->
+                <field name="state"/> <!-- Estat de la propietat -->
+                <field name="user_id"/> <!-- Responsable de la propietat -->
+            </list>
+        </field>
+    </record>
+
+    <!-- Vista de cerca per facilitar el filtratge de propietats -->
+    <record id="estate_property_search_view" model="ir.ui.view">
+        <field name="name">estate.property.search</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/> <!-- Cerca pel nom de la propietat -->
+                <field name="selling_price"/> <!-- Cerca pel preu de venda -->
+                <field name="postalcode"/> <!-- Cerca pel codi postal -->
+                <field name="date_availability"/> <!-- Cerca per data de disponibilitat -->
+                <field name="state"/> <!-- Cerca per estat de la propietat -->
+
+                <!-- Filtres predefinits -->
+                <filter name="filter_low_price" string="Baix preu" domain="[('selling_price', '&lt;', 100000)]"/>
+                <filter name="filter_available" string="Disponibles" domain="['|', ('state', '=', 'new'), ('state', '=', 'offer_received')]"/>
+            </search>
+        </field>
+    </record>
+</odoo>
